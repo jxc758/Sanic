@@ -1,22 +1,29 @@
-import javax.swing.JFrame;
+import java.awt.Color;
+import java.awt.Graphics;
 
-public class Sanic extends JFrame {
-	public static final int frame_width = 800;
-	public static final int frame_height = 450;
+public class Sanic
+{
+	public double x,y,xv,yv,runAccel,friction;
 	
-	public static void main(String[]args)
+	public Sanic(double x,double y,double xv,double yv,double runAccel,double friction)
 	{
-		new Sanic();
+		this.x = x;
+		this.y = y;
+		this.xv = xv;
+		this.yv = yv;
+		this.runAccel = runAccel;
+		this.friction = friction;
 	}
 	
-	public Sanic()
+	public void tick()
 	{
-		setTitle("Sanic");
-		setDefaultCloseOperation(EXIT_ON_CLOSE);
-		setSize(frame_width,frame_height);
-		setLocationRelativeTo(null);
-		setVisible(true);
-		setResizable(false);
-		add(new Game());
+		x += xv;
+		y += yv;
+	}
+	
+	public void render(Graphics g)
+	{
+		g.setColor(Color.BLUE);
+		g.fillRect((int) x, (int) y, 30, 30);
 	}
 }
