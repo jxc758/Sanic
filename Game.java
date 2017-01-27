@@ -11,8 +11,9 @@ public class Game extends Canvas implements Runnable
 	
 	private Sanic sanic;
 	private Block block;
+	private Block floor;
 	private KeyInput key;
-	private Block[] blocks = new Block[1];
+	private Block[] blocks = new Block[2];
 
 	public static void main(String args[])
 	{
@@ -25,7 +26,9 @@ public class Game extends Canvas implements Runnable
 		key = new KeyInput();
 		this.addKeyListener(key);
 		block = new Block(200,50,30,80);
+		floor = new Block(10,300,900,100);
 		blocks[0] = block;
+		blocks[1] = floor;
 		sanic = new Sanic(100,100,0,0,1,0.97);
 		new Window(WIDTH, HEIGHT, "Sanic!", this);
 	}
@@ -40,9 +43,13 @@ public class Game extends Canvas implements Runnable
 		{
 			sanic.xv += sanic.runAccel;
 		}
+		else if (key.upDown)
+		{
+			sanic.yv += -0.3;
+		}
 		
 		sanic.xv *= sanic.friction;
-		
+		sanic.yv += 0.1;
 		sanic.tick();
 	}
 	
@@ -62,13 +69,38 @@ public class Game extends Canvas implements Runnable
 		
 		sanic.render(g);
 		block.render(g);
+		floor.render(g);
 		for (int i =0;i<blocks.length;i++)
 		{
 				block = blocks[i];
 				if (block.sanicIntersects(sanic))
 				{
-					sanic.setX(block.x - 30);
-					sanic.setXv(-sanic.xv/2);
+					//System.out.println("sanic" + sanic.x);
+					//System.out.println("block" + block.x);
+					//if ((int)sanic.x + 30 > block.x)
+					//{
+					//	System.out.println("HIT");
+					//	sanic.setX(block.x - 30);
+					//	sanic.setXv(-sanic.xv/2);
+					//}
+					
+
+					 if(sanic.y  < block.y)
+					{
+						if (sanic.yv < 2)
+						{
+							System.out.println(sanic.yv);
+							sanic.setY(block.y - 29);
+							sanic.setYv(0);
+						}
+						else if (sanic.yv > 1)
+						{
+							System.out.println(sanic.yv);
+							sanic.setY(block.y - 30);
+							sanic.setYv(-sanic.yv/2);
+						}
+					}
+						
 				}
 		}
 		g.dispose();

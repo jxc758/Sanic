@@ -34,4 +34,12 @@ public class Sanic
 	{
 		xv = nxv;
 	}
+	public void setY(double ny)
+	{
+		y = ny;
+	}
+	public void setYv(double nyv)
+	{
+		yv = nyv;
+	}
 }
