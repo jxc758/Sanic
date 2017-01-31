@@ -5,6 +5,7 @@ public class KeyInput extends KeyAdapter
 {
 	public boolean leftDown = false;
 	public boolean rightDown = false;
+	public boolean upDown = false;
 	
 	public KeyInput()
 	{
@@ -24,6 +25,10 @@ public class KeyInput extends KeyAdapter
 			case KeyEvent.VK_RIGHT:
 				rightDown = true;
 				break;
+				
+			case KeyEvent.VK_UP:
+				upDown = true;
+				break;	
 		}
 	}
 	
@@ -39,6 +44,10 @@ public class KeyInput extends KeyAdapter
 				
 			case KeyEvent.VK_RIGHT:
 				rightDown = false;
+				break;
+				
+			case KeyEvent.VK_UP:
+				upDown = false;
 				break;
 		}
 	}

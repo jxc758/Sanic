@@ -1,29 +1,27 @@
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 
-public class Sanic
+public class Sanic extends GameObject
 {
-	public double x,y,xv,yv,runAccel,friction;
+	public double runAccel = 0.5;
 	
-	public Sanic(double x,double y,double xv,double yv,double runAccel,double friction)
+	public Sanic(double x,double y,double w,double h)
 	{
-		this.x = x;
-		this.y = y;
-		this.xv = xv;
-		this.yv = yv;
-		this.runAccel = runAccel;
-		this.friction = friction;
+		super(x,y,w,h);
 	}
 	
 	public void tick()
 	{
 		x += xv;
 		y += yv;
+		hitbox.setRect(x,y,w,h);
 	}
 	
 	public void render(Graphics g)
 	{
-		g.setColor(Color.BLUE);
-		g.fillRect((int) x, (int) y, 30, 30);
+		Graphics2D g2d = (Graphics2D)g;
+		g2d.setColor(Color.BLUE);
+		g2d.fill(hitbox);
 	}
 }
